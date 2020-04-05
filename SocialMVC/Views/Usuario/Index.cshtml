@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/css/estilos.css" rel="stylesheet" />
+    <title>Login</title>
+    <script src='https://kit.fontawesome.com/24be03f834.js'
+            crossorigin='anonymous'></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <i class="fas fa-users" id="icon"></i>
+            </div>
+            <form action="@Url.Action("Login")" method="post">
+                <input type="text" id="login" class="fadeIn second" name="email" placeholder="E-mail">
+                <input type="text" id="password" class="fadeIn third" name="pass" placeholder="Contraseña">
+                <button type="submit" class="fadeIn fourth" value="Login" name="loginBtn">Iniciar Sesión</button>
+            </form>
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Olvido su contraseña?</a>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+

@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SocialServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="int" Nullable="false" />
+          <Property Name="text_post" Type="varchar" MaxLength="250" />
+          <Property Name="path_img" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="reacciones_post">
+          <Key>
+            <PropertyRef Name="id_reacciones_post" />
+          </Key>
+          <Property Name="id_reacciones_post" Type="int" Nullable="false" />
+          <Property Name="post_usuario_id" Type="int" />
+          <Property Name="amigo_id" Type="int" />
+          <Property Name="gusta" Type="int" />
+          <Property Name="divierte" Type="int" />
+          <Property Name="asombra" Type="int" />
+          <Property Name="enamora" Type="int" />
+          <Property Name="entristece" Type="int" />
+          <Property Name="enoja" Type="int" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="sexo" Type="int" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="path_perfil" Type="varchar" MaxLength="150" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="usuario_amigo">
+          <Key>
+            <PropertyRef Name="id_usuario_amigo" />
+          </Key>
+          <Property Name="id_usuario_amigo" Type="int" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="id_amigo" Type="int" />
+          <Property Name="tipo" Type="int" />
+          <Property Name="fecha_amistad" Type="date" />
+          <Property Name="bloqueado" Type="int" />
+          <Property Name="silenciado" Type="int" />
+        </EntityType>
+        <EntityType Name="usuario_post">
+          <Key>
+            <PropertyRef Name="id_usuario_post" />
+          </Key>
+          <Property Name="id_usuario_post" Type="int" Nullable="false" />
+          <Property Name="post_id" Type="int" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="reacciones_id" Type="int" />
+          <Property Name="fecha_post" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="SocialServiceModelStoreContainer">
+          <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario_post" EntityType="Self.usuario_post" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SocialServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="post">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="Int32" Nullable="false" />
+          <Property Name="text_post" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="path_img" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="reacciones_post">
+          <Key>
+            <PropertyRef Name="id_reacciones_post" />
+          </Key>
+          <Property Name="id_reacciones_post" Type="Int32" Nullable="false" />
+          <Property Name="post_usuario_id" Type="Int32" />
+          <Property Name="amigo_id" Type="Int32" />
+          <Property Name="gusta" Type="Int32" />
+          <Property Name="divierte" Type="Int32" />
+          <Property Name="asombra" Type="Int32" />
+          <Property Name="enamora" Type="Int32" />
+          <Property Name="entristece" Type="Int32" />
+          <Property Name="enoja" Type="Int32" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="Int32" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="path_perfil" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="usuario_amigo">
+          <Key>
+            <PropertyRef Name="id_usuario_amigo" />
+          </Key>
+          <Property Name="id_usuario_amigo" Type="Int32" Nullable="false" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="id_amigo" Type="Int32" />
+          <Property Name="tipo" Type="Int32" />
+          <Property Name="fecha_amistad" Type="DateTime" Precision="0" />
+          <Property Name="bloqueado" Type="Int32" />
+          <Property Name="silenciado" Type="Int32" />
+        </EntityType>
+        <EntityType Name="usuario_post">
+          <Key>
+            <PropertyRef Name="id_usuario_post" />
+          </Key>
+          <Property Name="id_usuario_post" Type="Int32" Nullable="false" />
+          <Property Name="post_id" Type="Int32" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="reacciones_id" Type="Int32" />
+          <Property Name="fecha_post" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="SocialServiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="post" EntityType="Self.post" />
+          <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" />
+          <EntitySet Name="usuario_post" EntityType="Self.usuario_post" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SocialServiceModelStoreContainer" CdmEntityContainer="SocialServiceEntities">
+          <EntitySetMapping Name="post">
+            <EntityTypeMapping TypeName="SocialServiceModel.post">
+              <MappingFragment StoreEntitySet="post">
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="text_post" ColumnName="text_post" />
+                <ScalarProperty Name="path_img" ColumnName="path_img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reacciones_post">
+            <EntityTypeMapping TypeName="SocialServiceModel.reacciones_post">
+              <MappingFragment StoreEntitySet="reacciones_post">
+                <ScalarProperty Name="id_reacciones_post" ColumnName="id_reacciones_post" />
+                <ScalarProperty Name="post_usuario_id" ColumnName="post_usuario_id" />
+                <ScalarProperty Name="amigo_id" ColumnName="amigo_id" />
+                <ScalarProperty Name="gusta" ColumnName="gusta" />
+                <ScalarProperty Name="divierte" ColumnName="divierte" />
+                <ScalarProperty Name="asombra" ColumnName="asombra" />
+                <ScalarProperty Name="enamora" ColumnName="enamora" />
+                <ScalarProperty Name="entristece" ColumnName="entristece" />
+                <ScalarProperty Name="enoja" ColumnName="enoja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="SocialServiceModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="path_perfil" ColumnName="path_perfil" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_amigo">
+            <EntityTypeMapping TypeName="SocialServiceModel.usuario_amigo">
+              <MappingFragment StoreEntitySet="usuario_amigo">
+                <ScalarProperty Name="id_usuario_amigo" ColumnName="id_usuario_amigo" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="id_amigo" ColumnName="id_amigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fecha_amistad" ColumnName="fecha_amistad" />
+                <ScalarProperty Name="bloqueado" ColumnName="bloqueado" />
+                <ScalarProperty Name="silenciado" ColumnName="silenciado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_post">
+            <EntityTypeMapping TypeName="SocialServiceModel.usuario_post">
+              <MappingFragment StoreEntitySet="usuario_post">
+                <ScalarProperty Name="id_usuario_post" ColumnName="id_usuario_post" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="reacciones_id" ColumnName="reacciones_id" />
+                <ScalarProperty Name="fecha_post" ColumnName="fecha_post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
