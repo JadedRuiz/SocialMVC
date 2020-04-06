@@ -19,6 +19,7 @@ namespace SocialMVC.Controllers
         public ActionResult Login()
         {
             string btnClick = Request["loginBtn"];
+
             if(btnClick == "Login")
             {
                 string email = Request["email"];
@@ -30,7 +31,7 @@ namespace SocialMVC.Controllers
                 {
                     Session["nombre"] = result.nombres + result.apellidos;
                     Session["id_usuario"] = result.id_usuario;
-                    return RedirectToAction("Page", "Usuario");
+                    return RedirectToAction("Muro", "Posts");
                 }else if(result== null)
                 {
                     return View("Index");
