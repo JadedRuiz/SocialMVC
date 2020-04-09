@@ -13,10 +13,10 @@ namespace SocialMVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SocialServiceEntities : DbContext
+    public partial class SocialServiceEntitiesMVC : DbContext
     {
-        public SocialServiceEntities()
-            : base("name=SocialServiceEntities")
+        public SocialServiceEntitiesMVC()
+            : base("name=SocialServiceEntitiesMVC")
         {
         }
     

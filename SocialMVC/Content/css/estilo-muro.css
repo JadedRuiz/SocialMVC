@@ -1,0 +1,117 @@
+﻿*{
+    margin: 0px;
+    padding: 0px;
+}
+.fa-thumbs-up{
+    color: #0C38E8;
+}
+.fa-tired{
+    color: #FBC24F;
+}
+.fa-gratipay{
+    color: #ED2944;
+}
+.fa-grin-squint-tears{
+    color: #FBC24F;
+}
+.fa-surprise{
+    color: #FBC24F;
+}
+.fa-angry{
+    color: #E34F04;
+}
+@media screen and (min-width:1200px){
+    .navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content:space-between;
+    }
+    .icon {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 23px;
+        color: #298BFA;
+        margin-top: 8px;
+    }
+    nav form input{
+        margin-top: 10px;
+    }
+    nav form button{
+        margin-top: 10px;
+    }
+    .buscador{
+        min-width: 600px;
+        display: block;
+    }
+    .img-circle{
+        width:40px;
+    }
+    #msg{
+        min-width: 900px;
+        height: 50px;
+    }
+    .topfile{
+        margin-top: 15px;
+    }
+    .body-content{
+        margin-top: 30px;
+    }
+}
+@media screen and (max-width:1200px) {
+    .buscador{
+        min-width: 300px;
+        display: block;
+    }
+    .img-circle{
+        width:40px;
+    }
+    .navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content:space-between;
+    }
+    nav form input{
+        margin-top: 10px;
+    }
+    nav form button{
+        margin-top: 10px;
+    }
+    .icon {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 23px;
+        color: #AD54FF;
+        margin-top: 8px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .body-content{
+        margin-top: 40px;
+    }
+    #msg{
+        min-width: 700px;
+        height: 50px;
+    }
+}
+@media screen and (max-width:768px) {
+    .body-content{
+        margin-top: 40px;
+    }
+    #msg{
+        min-width: 600px;
+        height: 50px;
+    }
+}
+@media screen and (max-width:411px) {
+    .buscador{
+        min-width: 300px;
+    }
+    .body-content{
+        margin-top: 210px;
+    }
+    #msg{
+        min-width: 200px;
+        height: 50px;
+    }
+}
+

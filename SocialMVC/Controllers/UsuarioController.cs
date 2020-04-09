@@ -9,7 +9,7 @@ namespace SocialMVC.Controllers
 {
     public class UsuarioController : Controller
     {
-        SocialServiceEntities db = new SocialServiceEntities();
+        SocialServiceEntitiesMVC db = new SocialServiceEntitiesMVC();
         // GET: Usuario
         [HttpGet]
         public ActionResult Index()
@@ -29,7 +29,8 @@ namespace SocialMVC.Controllers
 
                 if(result != null)
                 {
-                    Session["nombre"] = result.nombres + result.apellidos;
+                    Session["nombre"] = result.nombres +" "+ result.apellidos;
+                    Session["img_perfil"] = result.path_perfil;
                     Session["id_usuario"] = result.id_usuario;
                     return RedirectToAction("Muro", "Posts");
                 }else if(result== null)

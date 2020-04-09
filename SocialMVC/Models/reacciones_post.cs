@@ -17,11 +17,6 @@ namespace SocialMVC.Models
         public int id_reacciones_post { get; set; }
         public Nullable<int> post_usuario_id { get; set; }
         public Nullable<int> amigo_id { get; set; }
-        public Nullable<int> gusta { get; set; }
-        public Nullable<int> divierte { get; set; }
-        public Nullable<int> asombra { get; set; }
-        public Nullable<int> enamora { get; set; }
-        public Nullable<int> entristece { get; set; }
-        public Nullable<int> enoja { get; set; }
+        public Nullable<int> reaccion { get; set; }
     }
 }

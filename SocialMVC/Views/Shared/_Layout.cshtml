@@ -1,39 +1,53 @@
-﻿<!DOCTYPE html>
+﻿@model SocialMVC.Models.PostsModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/css/estilos.css" rel="stylesheet" />
+    <link href="~/Content/css/estilo-muro.css" rel="stylesheet" />
+    <script src='https://kit.fontawesome.com/24be03f834.js'
+            crossorigin='anonymous'></script>
     <title>Social Service</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("SOCIAL SERVICE", "Muro", "Posts", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Perfil de Usuario", "Perfil", "Posts")</li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <!-- El logotipo y el icono que despliega el menú se agrupan
+             para mostrarlos mejor en los dispositivos móviles -->
+        <div class="navbar-header">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="img-circle" src="~/Content/Jaded Enrique Ruiz Pech/img_posts/20200408134049-scrum.png" />
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Perfil de Usuario</a></li>
+                        <li><a href="#">Configuración</a></li>
+                        <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Usuario")</li>
+                    </ul>
+                </li>
+            </ul>
+            <a class="navbar-brand navbar-left" href="#">
+            <i class="fab fa-stripe-s icon">ocial Service</i>
+            </a>
+            <form class="navbar-form navbar-left form-nav" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control  buscador" placeholder="Busca a alguien conocido">
+                </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+            </form>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Social Service .NET</p>
         </footer>
     </div>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -17,7 +17,6 @@ namespace SocialMVC.Models
         public int id_usuario_post { get; set; }
         public Nullable<int> post_id { get; set; }
         public Nullable<int> usuario_id { get; set; }
-        public Nullable<int> reacciones_id { get; set; }
         public Nullable<System.DateTime> fecha_post { get; set; }
     }
 }
