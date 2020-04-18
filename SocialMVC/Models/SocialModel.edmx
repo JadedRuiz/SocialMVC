@@ -22,6 +22,16 @@
           <Property Name="amigo_id" Type="int" />
           <Property Name="reaccion" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
@@ -61,6 +71,7 @@
         <EntityContainer Name="SocialServiceModelStoreContainer">
           <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_post" EntityType="Self.usuario_post" Schema="dbo" store:Type="Tables" />
@@ -86,6 +97,16 @@
           <Property Name="post_usuario_id" Type="Int32" />
           <Property Name="amigo_id" Type="Int32" />
           <Property Name="reaccion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -126,6 +147,7 @@
         <EntityContainer Name="SocialServiceEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="post" EntityType="Self.post" />
           <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" />
           <EntitySet Name="usuario_post" EntityType="Self.usuario_post" />
@@ -152,6 +174,17 @@
                 <ScalarProperty Name="post_usuario_id" ColumnName="post_usuario_id" />
                 <ScalarProperty Name="amigo_id" ColumnName="amigo_id" />
                 <ScalarProperty Name="reaccion" ColumnName="reaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SocialServiceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

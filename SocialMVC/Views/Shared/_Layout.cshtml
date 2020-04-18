@@ -23,8 +23,8 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Perfil de Usuario</a></li>
-                        <li><a href="#">Configuración</a></li>
+                        <li>@Html.ActionLink("Mi perfil","Perfil", "Posts")</li>
+                        <li>@Html.ActionLink("Editar", "Editar", "Editar")</li>
                         <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Usuario")</li>
                     </ul>
                 </li>
@@ -53,6 +53,7 @@
     
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
