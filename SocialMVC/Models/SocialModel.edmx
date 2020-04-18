@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombres" Type="varchar" MaxLength="50" />
           <Property Name="apellidos" Type="varchar" MaxLength="50" />
           <Property Name="sexo" Type="int" />
@@ -91,7 +91,7 @@
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="sexo" Type="Int32" />
@@ -123,7 +123,7 @@
           <Property Name="usuario_id" Type="Int32" />
           <Property Name="fecha_post" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="SocialServiceEntitiesMVC" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SocialServiceEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="post" EntityType="Self.post" />
           <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
@@ -135,7 +135,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SocialServiceModelStoreContainer" CdmEntityContainer="SocialServiceEntitiesMVC">
+        <EntityContainerMapping StorageEntityContainer="SocialServiceModelStoreContainer" CdmEntityContainer="SocialServiceEntities3">
           <EntitySetMapping Name="post">
             <EntityTypeMapping TypeName="SocialServiceModel.post">
               <MappingFragment StoreEntitySet="post">

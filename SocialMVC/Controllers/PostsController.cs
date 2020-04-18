@@ -10,7 +10,7 @@ namespace SocialMVC.Controllers
 {
     public class PostsController : Controller
     {
-        SocialServiceEntitiesMVC db = new SocialServiceEntitiesMVC();
+        SocialServiceEntities3 db = new SocialServiceEntities3();
         // GET: Posts
         public ActionResult Muro()
         {
@@ -62,8 +62,10 @@ namespace SocialMVC.Controllers
                         getEnoja = reacciones[5]
                     });
                 }
-                System.Diagnostics.Debug.WriteLine(modelo.Count);
+                var solicitudes = db.usuario_amigo.Where(x => x.usuario_id == id && x.tipo == 0).Count();
                 ViewBag.Posts = modelo;
+                ViewData["img_perfil"] = getDatosPerfil();
+                ViewData["solicitudes"] = solicitudes;
                 return View();
             }
             else
@@ -120,6 +122,103 @@ namespace SocialMVC.Controllers
                 var reacciones = db.reacciones_post.Where(x => x.amigo_id == id_user && x.post_usuario_id == id_post).ToList();
                 reacciones[0].reaccion = tipo;
             }
+            db.SaveChanges();
+            return RedirectToAction("Muro");
+        }
+        public string getDatosPerfil()
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var resu = db.usuario.Where(x => x.id_usuario == id).ToList();
+            return resu[0].path_perfil;
+        }
+        public ActionResult Search()
+        {
+            if (Request["buscar"] == "enviar")
+            {
+                List<BusquedaModel> datos = new List<BusquedaModel>();
+                int id = Convert.ToInt32(Session["id_usuario"]);
+                String busqueda = Request["busca"];
+                var result = (from u in db.usuario
+                              where (u.nombres.Contains(busqueda) ||
+                              u.apellidos.Contains(busqueda)) && u.id_usuario != id
+                              select new
+                              {
+                                  id_amigo = u.id_usuario,
+                                  nombre = u.nombres + " " + u.apellidos,
+                                  path_perfil = u.path_perfil
+                              }).ToList();
+                var amigos = (from ua in db.usuario_amigo
+                              join u in db.usuario on ua.id_amigo equals u.id_usuario
+                              where ua.usuario_id == id && (u.nombres.Contains(busqueda) ||
+                              u.apellidos.Contains(busqueda))
+                              select new
+                              {
+                                  id_amigo = u.id_usuario,
+                                  nombre = u.nombres + " " + u.apellidos,
+                                  path_perfil = u.path_perfil,
+                                  tipo = ua.tipo 
+                              }).ToList();
+                foreach(var amigo in amigos)
+                {
+                    if (amigo.tipo == 0)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = amigo.id_amigo,
+                            nombre = amigo.nombre,
+                            path_perfil = amigo.path_perfil,
+                            isAmigo = 0
+                        });
+                    }
+                    if (amigo.tipo == 1)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = amigo.id_amigo,
+                            nombre = amigo.nombre,
+                            path_perfil = amigo.path_perfil,
+                            isAmigo = 1
+                        });
+                    }
+                }
+                foreach (var item in result)
+                {
+                    Boolean band = false;
+                    foreach(var dato in datos)
+                    {
+                        if(item.nombre == dato.nombre)
+                        {
+                            band = true;
+                        }
+                    }
+                    if(band != true)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = item.id_amigo,
+                            nombre = item.nombre,
+                            path_perfil = item.path_perfil,
+                            isAmigo = -1
+                        });
+                    }
+                }
+
+                ViewBag.Datos = datos;
+                return View();
+            }
+            return RedirectToAction("Muro");
+        }
+        public ActionResult addAmigo(int id_amigo)
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            usuario_amigo ua = new usuario_amigo();
+            ua.usuario_id = id_amigo;
+            ua.id_amigo = id;
+            ua.tipo = 0;
+            ua.fecha_amistad = null;
+            ua.silenciado = 0;
+            ua.bloqueado = 0;
+            db.usuario_amigo.Add(ua);
             db.SaveChanges();
             return RedirectToAction("Muro");
         }

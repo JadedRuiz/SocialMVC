@@ -9,7 +9,7 @@ namespace SocialMVC.Controllers
 {
     public class UsuarioController : Controller
     {
-        SocialServiceEntitiesMVC db = new SocialServiceEntitiesMVC();
+        SocialServiceEntities3 db = new SocialServiceEntities3();
         // GET: Usuario
         [HttpGet]
         public ActionResult Index()
@@ -56,5 +56,6 @@ namespace SocialMVC.Controllers
             else
                 return RedirectToAction("Index");
         }
+        
     }
 }

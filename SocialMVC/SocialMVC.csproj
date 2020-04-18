@@ -163,36 +163,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\BusquedaModel.cs" />
     <Compile Include="Models\post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostsModel.cs" />
     <Compile Include="Models\reacciones_post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SocialModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SocialModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SocialModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\usuario.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuario_amigo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuario_post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValidarUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,15 +209,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\SocialModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>SocialModel.edmx</DependentUpon>
+      <LastGenOutput>SocialModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\SocialModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>SocialModel.edmx</DependentUpon>
+      <LastGenOutput>SocialModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -225,12 +226,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\SocialModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>SocialModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\SocialModel.edmx.diagram">
+      <DependentUpon>SocialModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -257,6 +258,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Posts\_ViewStart.cshtml" />
     <Content Include="Views\Posts\Muro.cshtml" />
+    <Content Include="Views\Posts\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

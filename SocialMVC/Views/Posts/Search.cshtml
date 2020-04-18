@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    List<SocialMVC.Models.BusquedaModel> data = ViewBag.Datos;
+}
+
+<h2>Resultados de: </h2>
+@foreach (var item in data)
+{
+    <div class="well">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="img-circle" src="@item.path_perfil"/>
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@item.nombre</h4>
+                @if (item.isAmigo == -1)
+                {
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <a href="@Url.Action("AddAmigo", new {id_amigo=item.id_usuario})">
+                                <span><i class="fas fa-user-plus"></i> Agregar a Amigos</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                @if (item.isAmigo == 0)
+                {
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <a href="@Url.Action("RemoveAdd", new {id_amigo=item.id_usuario})">
+                                <span><i class="fas fa-user-clock"></i>Solicitud Enviada</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                @if (item.isAmigo == 1)
+                {
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <a href="@Url.Action("Perfil", new {id_amigo=item.id_usuario})">
+                                <span><i class="fas fa-user-check"></i> Amigo</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+        </div>
+
+        }
