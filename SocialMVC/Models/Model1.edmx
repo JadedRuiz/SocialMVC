@@ -22,11 +22,21 @@
           <Property Name="amigo_id" Type="int" />
           <Property Name="reaccion" Type="int" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombres" Type="varchar" MaxLength="50" />
           <Property Name="apellidos" Type="varchar" MaxLength="50" />
           <Property Name="sexo" Type="int" />
@@ -61,6 +71,7 @@
         <EntityContainer Name="SocialServiceModelStoreContainer">
           <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_post" EntityType="Self.usuario_post" Schema="dbo" store:Type="Tables" />
@@ -87,11 +98,21 @@
           <Property Name="amigo_id" Type="Int32" />
           <Property Name="reaccion" Type="Int32" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="sexo" Type="Int32" />
@@ -123,9 +144,10 @@
           <Property Name="usuario_id" Type="Int32" />
           <Property Name="fecha_post" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="SocialServiceEntitiesMVC" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SocialServiceEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="post" EntityType="Self.post" />
           <EntitySet Name="reacciones_post" EntityType="Self.reacciones_post" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_amigo" EntityType="Self.usuario_amigo" />
           <EntitySet Name="usuario_post" EntityType="Self.usuario_post" />
@@ -135,7 +157,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SocialServiceModelStoreContainer" CdmEntityContainer="SocialServiceEntitiesMVC">
+        <EntityContainerMapping StorageEntityContainer="SocialServiceModelStoreContainer" CdmEntityContainer="SocialServiceEntities3">
           <EntitySetMapping Name="post">
             <EntityTypeMapping TypeName="SocialServiceModel.post">
               <MappingFragment StoreEntitySet="post">
@@ -152,6 +174,17 @@
                 <ScalarProperty Name="post_usuario_id" ColumnName="post_usuario_id" />
                 <ScalarProperty Name="amigo_id" ColumnName="amigo_id" />
                 <ScalarProperty Name="reaccion" ColumnName="reaccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SocialServiceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

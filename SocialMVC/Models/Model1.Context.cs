@@ -13,10 +13,10 @@ namespace SocialMVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SocialServiceEntitiesMVC : DbContext
+    public partial class SocialServiceEntities3 : DbContext
     {
-        public SocialServiceEntitiesMVC()
-            : base("name=SocialServiceEntitiesMVC")
+        public SocialServiceEntities3()
+            : base("name=SocialServiceEntities3")
         {
         }
     
@@ -27,6 +27,7 @@ namespace SocialMVC.Models
     
         public virtual DbSet<post> post { get; set; }
         public virtual DbSet<reacciones_post> reacciones_post { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
         public virtual DbSet<usuario_amigo> usuario_amigo { get; set; }
         public virtual DbSet<usuario_post> usuario_post { get; set; }

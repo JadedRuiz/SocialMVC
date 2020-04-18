@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SocialMVC.Models.PostsModel> lista = ViewBag.Posts;
+    lista.Reverse();
+    var User = ViewBag.Perfil;
+}
+@{ 
+    ViewBag.Title = "Mi perfil";
+}
+@*Posts del perfil en sesion*@
+<div class="pull-right alert alert-info" role="alert">
+    <h1>Bienvenido  @User.nombres @User.apellidos</h1>
+    <img src="@User.path_perfil"/>
+    <p>Descripcion: @User.descripcion</p>
+    <p>Cumpleaños: @User.fecha_nacimiento</p>
+    @{ 
+        if(User.sexo != 0)
+        {
+            <p>Hombre</p>
+        }
+        else
+        {
+            <p>Mujer</p>
+        }
+    }
+    <button type="button" class="btn btn-info">@Html.ActionLink("Editar", "Editar", "Editar")</button>
+</div>
+@foreach (var item in lista)
+{
+    <h2>@item.nombre</h2>
+    <div class="container fluid">
+        @if (item.path_post != "")
+        {
+            <img src="@item.path_post.Trim()" class="img-responsive img-rounded" width="150" height="150" />
+        }
+        <p style="font-size: 22px">
+            @item.texto_post
+        </p>
+        @if (item.getLike != 0)
+        {
+            <i class="fas fa-thumbs-up">@item.getLike</i>
+        }
+        @if (item.getEntristese != 0)
+        {
+            <i class="fas fa-tired">@item.getEntristese</i>
+        }
+        @if (item.getEncanta != 0)
+        {
+            <i class="fab fa-gratipay">@item.getEncanta</i>
+        }
+        @if (item.getDivierte != 0)
+        {
+            <i class="fas fa-grin-squint-tears">@item.getDivierte</i>
+        }
+        @if (item.getAsombra != 0)
+        {
+            <i class="fas fa-surprise">@item.getAsombra</i>
+
+        }
+        @if (item.getEnoja != 0)
+        {
+            <i class="fas fa-angry">@item.getEnoja</i>
+        }
+    </div>
+    <div>
+        <span class="badge">Posted @item.fecha_post</span>
+        <div class="pull-right">
+            <a href="@Url.Action("Reaccionar", new {tipo = 1, id_post = item.id_post_usuario})"><span class="label label-info">Like</span></a>
+            <a href="@Url.Action("Reaccionar", new {tipo = 2, id_post = item.id_post_usuario})"><span class="label label-default">Me entristece</span></a>
+            <a href="@Url.Action("Reaccionar", new {tipo = 3, id_post = item.id_post_usuario})"><span class="label label-primary">Me encanta</span></a>
+            <a href="@Url.Action("Reaccionar", new {tipo = 4, id_post = item.id_post_usuario})"><span class="label label-success">Me divierte</span></a>
+            <a href="@Url.Action("Reaccionar", new {tipo = 5, id_post = item.id_post_usuario})"><span class="label label-warning">Me Sorprende</span></a>
+            <a href="@Url.Action("Reaccionar", new {tipo = 6, id_post = item.id_post_usuario})"><span class="label label-danger">Me enoja</span></a>
+        </div>
+    </div>
+    <hr>
+}
+
+
+

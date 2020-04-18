@@ -1,0 +1,42 @@
+﻿@model SocialMVC.Models.User
+@{
+    ViewBag.Title = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Editar", "Editar", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.id_usuario)
+            <div>
+                @Html.LabelFor(d => d.nombres)
+                @Html.TextBoxFor(d => d.nombres, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.nombres, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.apellidos)
+                @Html.TextBoxFor(d => d.apellidos, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.apellidos,null,new { @class = "red"})
+            </div>
+            <div>
+                @Html.LabelFor(d => d.telefono)
+                @Html.TextBoxFor(d => d.telefono, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.telefono, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.descripcion)
+                @Html.TextBoxFor(d => d.descripcion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.descripcion, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.fecha_nacimiento) <br />
+                @Html.EditorFor(d => d.fecha_nacimiento, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.fecha_nacimiento, null, new { @class = "red" })
+            </div>
+            <div style="text-align:right">
+                <input value="Guardar" class="btn btn-primary" type="submit"/>
+            </div>
+        </div>
+    </div>
+}
