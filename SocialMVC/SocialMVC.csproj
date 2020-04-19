@@ -186,6 +186,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SocialModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\usuario.cs">
       <DependentUpon>SocialModel.tt</DependentUpon>
     </Compile>

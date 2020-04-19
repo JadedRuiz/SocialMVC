@@ -44,6 +44,21 @@
                         </li>
                     </ul>
                 }
+                @if (item.isAmigo == 2)
+                {
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <a href="@Url.Action("AcceptOrDeneg", new {id_amigo=item.id_usuario, tipo=0})">
+                                <span><i class="fas fa-user-check"></i>Aceptar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("AcceptOrDeneg", new {id_amigo=item.id_usuario, tipo=1})">
+                                <span><i class="fas fa-user-times"></i>Rechazar</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
             </div>
         </div>
         </div>
