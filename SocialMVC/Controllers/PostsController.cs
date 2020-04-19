@@ -93,6 +93,7 @@ namespace SocialMVC.Controllers
                     });
                 }
                 System.Diagnostics.Debug.WriteLine(modelo.Count);
+                ViewData["img_perfil"] = getDatosPerfil();
                 ViewBag.Posts = modelo;
                 return View();
             }
@@ -108,12 +109,13 @@ namespace SocialMVC.Controllers
             {
                 List<PostsModel> modelo = new List<PostsModel>();
                 int id = Convert.ToInt32(Session["id_usuario"]);
+                DateTime horaA = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
                 var publicaciones = (from up in db.usuario_post
                                      join p in db.post on up.post_id equals p.id_post
                                      join ua in db.usuario_amigo on up.usuario_id equals ua.id_amigo
                                      join u in db.usuario on ua.id_amigo equals u.id_usuario
-                                     where ua.usuario_id == id
-                                     where ua.tipo == 1
+                                     where ua.usuario_id == id && ua.tipo == 1
+                                     && up.fecha_post >= horaA
                                      select new
                                      {
                                          id_up = up.id_usuario_post,
@@ -230,7 +232,7 @@ namespace SocialMVC.Controllers
                 int id = Convert.ToInt32(Session["id_usuario"]);
                 String busqueda = Request["busca"];
                 //Busqueda solo usuarios que no sean ni amigos ni solicitudes de amistad
-                var filtro1= db.usuario_amigo.Select(x => x.id_amigo).ToList();
+                var filtro1 = db.usuario_amigo.Where(x => x.usuario_id == id).Select(x => x.id_amigo).ToList();
                 var usuarios = db.usuario.Where(p => !filtro1.Contains(p.id_usuario) && (p.nombres.Contains(busqueda) || 
                 p.apellidos.Contains(busqueda)) && p.id_usuario!=id).ToList();
 
@@ -291,6 +293,7 @@ namespace SocialMVC.Controllers
                     }
                 }
                 ViewBag.Datos = datos;
+                ViewData["img_perfil"] = getDatosPerfil();
                 return View();
             }
             return RedirectToAction("Muro");
@@ -322,6 +325,33 @@ namespace SocialMVC.Controllers
         public ActionResult AcceptOrDeneg(int tipo, int id_amigo)
         {
             int id = Convert.ToInt32(Session["id_usuario"]);
+            resolverSoli(id_amigo, id, tipo);
+            return RedirectToAction("Muro");
+        }
+        [HttpGet]
+        public string AcceptOrDenegModal(int tipo, int id_amigo)
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var respuesta = resolverSoli(id_amigo,id,tipo);
+            return respuesta;
+        }
+        [HttpGet]
+        public JsonResult pintaSolicitudes()
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var solicitudes = (from u in db.usuario
+                               join ua in db.usuario_amigo on u.id_usuario equals ua.usuario_id
+                               where ua.id_amigo == id && ua.tipo == 0
+                               select new
+                               {
+                                   id_amigo = u.id_usuario,
+                                   nombre = u.nombres + " " + u.apellidos,
+                                   img_perfil = u.path_perfil
+                               }).ToList();
+            return Json(solicitudes, JsonRequestBehavior.AllowGet);
+        }
+        public string resolverSoli(int id_amigo, int id, int tipo)
+        {
             var solicitud = db.usuario_amigo.Where(x => x.id_amigo == id
                 && x.usuario_id == id_amigo).ToList();
             var enviar = db.usuario_amigo.Where(x => x.id_amigo == id_amigo
@@ -330,18 +360,16 @@ namespace SocialMVC.Controllers
             {
                 solicitud[0].tipo = 1;
                 enviar[0].tipo = 1;
-            }else
-            {
-                usuario_amigo amistad = new usuario_amigo();
-                amistad.id_amigo = id_amigo;
-                amistad.usuario_id = id;
-                db.usuario_amigo.Attach(amistad);
-                amistad.id_amigo = id;
-                amistad.usuario_id = id_amigo;
-                db.usuario_amigo.Attach(amistad);
+                db.SaveChanges();
+                return "Solicitud Agregada";
             }
-            db.SaveChanges();
-            return RedirectToAction("Muro");
+            else
+            {
+                db.usuario_amigo.RemoveRange(solicitud);
+                db.usuario_amigo.RemoveRange(enviar);
+                db.SaveChanges();
+                return "Solicitud Rechazada";
+            }
         }
     }
 }

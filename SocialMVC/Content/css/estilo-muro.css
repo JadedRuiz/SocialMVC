@@ -2,6 +2,15 @@
     margin: 0px;
     padding: 0px;
 }
+#mov{
+    
+}
+.icoNoti{
+    font-size: 15px;
+}
+.icoNoti:hover{
+    color : darkseagreen;
+}
 .fa-thumbs-up{
     color: #0C38E8;
 }
