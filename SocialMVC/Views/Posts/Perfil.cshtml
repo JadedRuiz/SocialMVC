@@ -18,7 +18,7 @@
         <div class="pull-right alert alert-info" role="alert">
             <h1>Bienvenido  @User.nombres @User.apellidos</h1>
             <p>Descripcion: @User.descripcion</p>
-            <p>Cumpleaños: @User.fecha_nacimiento</p>
+            <p>Cumpleaños: @User.fecha_nacimiento.ToString("dd 'de' MMMM")</p>
             <p>Edad: @User.edad</p>
             @{
                 if (User.sexo != 0)
