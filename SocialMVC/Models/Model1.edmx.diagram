@@ -4,12 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5a021dc388d4413bab9ded0938b1fad0" Name="Diagram1">
+      <Diagram DiagramId="b05a2599c4534af58c1c952d7689849c" Name="Diagram1">
         <EntityTypeShape EntityType="SocialServiceModel.post" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SocialServiceModel.reacciones_post" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialServiceModel.usuario" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialServiceModel.usuario_amigo" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SocialServiceModel.usuario_post" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialServiceModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialServiceModel.usuario" Width="1.5" PointX="4.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialServiceModel.usuario_amigo" Width="1.5" PointX="6.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialServiceModel.usuario_post" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

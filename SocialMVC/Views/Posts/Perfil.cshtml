@@ -3,29 +3,44 @@
     List<SocialMVC.Models.PostsModel> lista = ViewBag.Posts;
     lista.Reverse();
     var User = ViewBag.Perfil;
+    var check = ViewBag.id;
+    var MySession = Convert.ToInt32(Session["id_usuario"]);
 }
 @{ 
     ViewBag.Title = "Mi perfil";
 }
 @*Posts del perfil en sesion*@
-<div class="pull-right alert alert-info" role="alert">
-    <h1>Bienvenido  @User.nombres @User.apellidos</h1>
-    <img src="@User.path_perfil"/>
-    <p>Descripcion: @User.descripcion</p>
-    <p>Cumpleaños: @User.fecha_nacimiento</p>
-    <p>Edad: @User.edad</p>
-    @{ 
-        if(User.sexo != 0)
-        {
-            <p>Hombre</p>
-        }
-        else
-        {
-            <p>Mujer</p>
-        }
-    }
-    <button type="button" class="btn btn-info">@Html.ActionLink("Editar", "Editar", "Editar")</button>
+<div class="row">
+    <div class="col-md-4">
+        <img src="@User.path_perfil"/>
+    </div>
+    <div class="col-md-8">
+        <div class="pull-right alert alert-info" role="alert">
+            <h1>Bienvenido  @User.nombres @User.apellidos</h1>
+            <p>Descripcion: @User.descripcion</p>
+            <p>Cumpleaños: @User.fecha_nacimiento</p>
+            <p>Edad: @User.edad</p>
+            @{
+                if (User.sexo != 0)
+                {
+                    <p>Hombre</p>
+                }
+                else
+                {
+                    <p>Mujer</p>
+                }
+            }
+            @if (check == MySession)
+            {
+                <button type="button" class="btn btn-info">@Html.ActionLink("Editar", "Editar", "Editar")</button>
+
+            }
+
+
+        </div>
+    </div>
 </div>
+
 @foreach (var item in lista)
 {
     <h2>@item.nombre</h2>

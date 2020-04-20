@@ -10,14 +10,19 @@ namespace SocialMVC.Controllers
 {
     public class PostsController : Controller
     {
-        SocialServiceEntities3 db = new SocialServiceEntities3();
+        SocialServiceEntities4 db = new SocialServiceEntities4();
         // GET: Posts
-        public ActionResult Perfil()
+            //Perfil usuario en sesion
+        public ActionResult Perfil(int id_amigo = 0)
         {
-
             if (ValidarUsuario.userExist())
             {
-                int id = Convert.ToInt32(Session["id_usuario"]);
+                if(id_amigo == 0)
+                {
+                    id_amigo = Convert.ToInt32(Session["id_usuario"]);
+                }
+                int id = id_amigo;
+                //int id = Convert.ToInt32(Session["id_usuario"]);
                 var infoPerfil = (from u in db.usuario
                                   where u.id_usuario == id
                                   select new
@@ -45,9 +50,9 @@ namespace SocialMVC.Controllers
                     telefono = infoPerfil.telefono,
                     path_perfil = infoPerfil.path_perfil,
                     descripcion = infoPerfil.descripcion
-
                 };
                 ViewBag.Perfil = user;
+                ViewBag.id = id;
                 List<PostsModel> modelo = new List<PostsModel>();
                 var publicaciones = (from up in db.usuario_post
                                      join p in db.post on up.post_id equals p.id_post
