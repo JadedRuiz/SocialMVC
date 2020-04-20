@@ -236,6 +236,7 @@ namespace SocialMVC.Controllers
                 List<BusquedaModel> datos = new List<BusquedaModel>();
                 int id = Convert.ToInt32(Session["id_usuario"]);
                 String busqueda = Request["busca"];
+                ViewBag.buscar = busqueda;
                 //Busqueda solo usuarios que no sean ni amigos ni solicitudes de amistad
                 var filtro1 = db.usuario_amigo.Where(x => x.usuario_id == id).Select(x => x.id_amigo).ToList();
                 var usuarios = db.usuario.Where(p => !filtro1.Contains(p.id_usuario) && (p.nombres.Contains(busqueda) || 

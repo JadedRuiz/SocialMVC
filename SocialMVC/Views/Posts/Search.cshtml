@@ -4,7 +4,7 @@
     List<SocialMVC.Models.BusquedaModel> data = ViewBag.Datos;
 }
 
-<h2>Resultados de: </h2>
+<h2>Resultados de: @ViewBag.buscar</h2>
 @foreach (var item in data)
 {
     <div class="well">
