@@ -93,6 +93,7 @@ namespace SocialMVC.Controllers
                     });
                 }
                 System.Diagnostics.Debug.WriteLine(modelo.Count);
+                ViewData["img_perfil"] = getDatosPerfil();
                 ViewBag.Posts = modelo;
                 return View();
             }
@@ -108,11 +109,13 @@ namespace SocialMVC.Controllers
             {
                 List<PostsModel> modelo = new List<PostsModel>();
                 int id = Convert.ToInt32(Session["id_usuario"]);
+                DateTime horaA = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
                 var publicaciones = (from up in db.usuario_post
                                      join p in db.post on up.post_id equals p.id_post
                                      join ua in db.usuario_amigo on up.usuario_id equals ua.id_amigo
                                      join u in db.usuario on ua.id_amigo equals u.id_usuario
-                                     where ua.usuario_id == id
+                                     where ua.usuario_id == id && ua.tipo == 1
+                                     && up.fecha_post >= horaA
                                      select new
                                      {
                                          id_up = up.id_usuario_post,
@@ -152,8 +155,10 @@ namespace SocialMVC.Controllers
                         getEnoja = reacciones[5]
                     });
                 }
-                System.Diagnostics.Debug.WriteLine(modelo.Count);
+                var solicitudes = db.usuario_amigo.Where(x => x.id_amigo == id && x.tipo == 0).Count();
                 ViewBag.Posts = modelo;
+                ViewData["img_perfil"] = getDatosPerfil();
+                ViewData["solicitudes"] = solicitudes;
                 return View();
             }
             else
@@ -212,6 +217,159 @@ namespace SocialMVC.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Muro");
+        }
+        public string getDatosPerfil()
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var resu = db.usuario.Where(x => x.id_usuario == id).ToList();
+            return resu[0].path_perfil;
+        }
+        public ActionResult Search()
+        {
+            if (Request["buscar"] == "enviar")
+            {
+                List<BusquedaModel> datos = new List<BusquedaModel>();
+                int id = Convert.ToInt32(Session["id_usuario"]);
+                String busqueda = Request["busca"];
+                //Busqueda solo usuarios que no sean ni amigos ni solicitudes de amistad
+                var filtro1 = db.usuario_amigo.Where(x => x.usuario_id == id).Select(x => x.id_amigo).ToList();
+                var usuarios = db.usuario.Where(p => !filtro1.Contains(p.id_usuario) && (p.nombres.Contains(busqueda) || 
+                p.apellidos.Contains(busqueda)) && p.id_usuario!=id).ToList();
+
+                //Busqueda de amigos
+                var amigos = (from u in db.usuario
+                              join ua in db.usuario_amigo on u.id_usuario equals ua.id_amigo
+                              where ua.usuario_id == id && (u.nombres.Contains(busqueda)
+                               || u.apellidos.Contains(busqueda))
+                              select new
+                              {
+                                  id_amigo = u.id_usuario,
+                                  nombre = u.nombres + " " + u.apellidos,
+                                  path_perfil = u.path_perfil,
+                                  tipo = ua.tipo
+                              }).ToList();
+                foreach (var usuario in usuarios)
+                {
+                    System.Diagnostics.Debug.WriteLine(usuario.nombres);
+                    datos.Add(new BusquedaModel
+                    {
+                        id_usuario = usuario.id_usuario,
+                        nombre = usuario.nombres +" "+ usuario.apellidos,
+                        path_perfil = usuario.path_perfil,
+                        isAmigo = -1
+                    });
+                }
+                foreach (var amigo in amigos)
+                {
+                    if (amigo.tipo == 0)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = amigo.id_amigo,
+                            nombre = amigo.nombre,
+                            path_perfil = amigo.path_perfil,
+                            isAmigo = 0
+                        });
+                    }
+                    if (amigo.tipo == 1)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = amigo.id_amigo,
+                            nombre = amigo.nombre,
+                            path_perfil = amigo.path_perfil,
+                            isAmigo = 1
+                        });
+                    }
+                    if (amigo.tipo == 2)
+                    {
+                        datos.Add(new BusquedaModel
+                        {
+                            id_usuario = amigo.id_amigo,
+                            nombre = amigo.nombre,
+                            path_perfil = amigo.path_perfil,
+                            isAmigo = 2
+                        });
+                    }
+                }
+                ViewBag.Datos = datos;
+                ViewData["img_perfil"] = getDatosPerfil();
+                return View();
+            }
+            return RedirectToAction("Muro");
+        }
+        public ActionResult addAmigo(int id_amigo)
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            usuario_amigo enviar = new usuario_amigo();
+            usuario_amigo notificar = new usuario_amigo();
+            //Enviar solicitud
+            enviar.usuario_id = id;
+            enviar.id_amigo = id_amigo;
+            enviar.tipo = 0;
+            enviar.fecha_amistad = null;
+            enviar.silenciado = null;
+            enviar.bloqueado = null;
+            //Notificar a usuario
+            notificar.usuario_id = id_amigo;
+            notificar.id_amigo = id;
+            notificar.tipo = 2;
+            notificar.fecha_amistad = null;
+            notificar.silenciado = null;
+            notificar.bloqueado = null;
+            db.usuario_amigo.Add(enviar);
+            db.usuario_amigo.Add(notificar);
+            db.SaveChanges();
+            return RedirectToAction("Muro");
+        }
+        public ActionResult AcceptOrDeneg(int tipo, int id_amigo)
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            resolverSoli(id_amigo, id, tipo);
+            return RedirectToAction("Muro");
+        }
+        [HttpGet]
+        public string AcceptOrDenegModal(int tipo, int id_amigo)
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var respuesta = resolverSoli(id_amigo,id,tipo);
+            return respuesta;
+        }
+        [HttpGet]
+        public JsonResult pintaSolicitudes()
+        {
+            int id = Convert.ToInt32(Session["id_usuario"]);
+            var solicitudes = (from u in db.usuario
+                               join ua in db.usuario_amigo on u.id_usuario equals ua.usuario_id
+                               where ua.id_amigo == id && ua.tipo == 0
+                               select new
+                               {
+                                   id_amigo = u.id_usuario,
+                                   nombre = u.nombres + " " + u.apellidos,
+                                   img_perfil = u.path_perfil
+                               }).ToList();
+            return Json(solicitudes, JsonRequestBehavior.AllowGet);
+        }
+        public string resolverSoli(int id_amigo, int id, int tipo)
+        {
+            var solicitud = db.usuario_amigo.Where(x => x.id_amigo == id
+                && x.usuario_id == id_amigo).ToList();
+            var enviar = db.usuario_amigo.Where(x => x.id_amigo == id_amigo
+            && x.usuario_id == id).ToList();
+            if (tipo == 0)
+            {
+                solicitud[0].tipo = 1;
+                enviar[0].tipo = 1;
+                db.SaveChanges();
+                return "Solicitud Agregada";
+            }
+            else
+            {
+                db.usuario_amigo.RemoveRange(solicitud);
+                db.usuario_amigo.RemoveRange(enviar);
+                db.SaveChanges();
+                return "Solicitud Rechazada";
+            }
         }
     }
 }
