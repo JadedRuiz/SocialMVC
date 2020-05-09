@@ -10,7 +10,7 @@ namespace SocialMVC.Controllers
 {
     public class PostsController : Controller
     {
-        SocialServiceEntities4 db = new SocialServiceEntities4();
+        SocialServiceEntities3 db = new SocialServiceEntities3();
         // GET: Posts
             //Perfil usuario en sesion
         public ActionResult Perfil(int id_amigo = 0)

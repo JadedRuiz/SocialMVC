@@ -15,7 +15,7 @@ namespace SocialMVC.Controllers
             User model = new User();
             if (ValidarUsuario.userExist())
             {
-                using (SocialServiceEntities4 db = new SocialServiceEntities4())
+                using (SocialServiceEntities3 db = new SocialServiceEntities3())
                 {
                     int idUsuario = Convert.ToInt32(Session["id_usuario"]);
                     var MyUser = db.usuario.Find(idUsuario);
@@ -35,7 +35,7 @@ namespace SocialMVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    using (SocialServiceEntities4 db = new SocialServiceEntities4())
+                    using (SocialServiceEntities3 db = new SocialServiceEntities3())
                     {
                         int idUsuario = Convert.ToInt32(Session["id_usuario"]);
                         var User = db.usuario.Find(idUsuario);

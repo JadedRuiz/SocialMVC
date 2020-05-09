@@ -9,7 +9,7 @@ namespace SocialMVC.Controllers
 {
     public class UsuarioController : Controller
     {
-        SocialServiceEntities4 db = new SocialServiceEntities4();
+        SocialServiceEntities3 db = new SocialServiceEntities3();
         // GET: Usuario
         [HttpGet]
         public ActionResult Index()
