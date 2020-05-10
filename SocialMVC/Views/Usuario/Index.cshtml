@@ -26,12 +26,36 @@
                 <button type="submit" class="fadeIn fourth" value="Login" name="loginBtn">Iniciar Sesión</button>
             </form>
             <div id="formFooter">
-                <a class="underlineHover" href="#">Olvido su contraseña?</a>
+                <a class="underlineHover btn forget" data-toggle="modal" data-target="#myModal" href="#">Olvido su contraseña?</a>
+                <a class="underlineHover btn register" data-toggle="modal" data-target="#myModal" href="#">Registrarse</a>
             </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title header"></h4>
+                </div>
+                <div class="modal-body pinta">
+
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
+                    <div class="pintaBtn" style="display:inline-block"></div>
+                </div>
+            </div>
+            
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Content/js/js-login.js"></script>
 </body>
 </html>
 

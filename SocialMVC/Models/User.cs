@@ -32,6 +32,7 @@ namespace SocialMVC.Models
         [Phone]
         public string telefono { get; set; }
         public string path_perfil { get; set; }
+        public string path_fondo { get; set; }
         public string descripcion { get; set; }
 
 

@@ -23,6 +23,7 @@ namespace SocialMVC.Models
         public string contraseña { get; set; }
         public string telefono { get; set; }
         public string path_perfil { get; set; }
+        public string path_fondo { get; set; }
         public string descripcion { get; set; }
     }
 }

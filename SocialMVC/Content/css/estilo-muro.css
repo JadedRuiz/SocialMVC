@@ -1,9 +1,104 @@
 ﻿*{
     margin: 0px;
     padding: 0px;
+    font-family: 'Montserrat', sans-serif;
 }
-#mov{
-    
+.fondo {
+    height: 300px;
+}
+.bg{
+    width : 100%;
+    height : 100%;
+    border-radius: 10px;
+    opacity: .82;
+}
+.chico{
+    font-size: 14px;
+    display: inline-block;
+}
+.mover{
+    position: absolute;
+    top: 230px;
+}
+#caso{
+    font-family: 'Oswald', sans-serif;
+    font-size: 35px;
+    color: white;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.caja{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+#imgPerfil{
+    width : 180px;
+    height: 180px;
+    border-radius : 50%;
+    overflow : hidden;
+}
+#imgPerfil img{
+    width : 100%;
+    height: auto;
+}
+@supports(object-fit: cover){
+    #imgPerfil img{
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+.infoPersonal{
+    margin-top:70px
+}
+.infoPersonal table{
+    width: 100%;
+}
+.titulo{
+    font-size: 22px;
+    border-bottom: 1px gray solid;
+    background-color: #F5F6F7;
+    padding-left: 5px;
+}
+.column{
+    font-size: 17px;
+    border-right: 1px gray solid;
+    padding-left: 5px;
+}
+.fila{
+    padding-left:20px;
+    font-size: 16px;
+}
+.textoSeparador{
+    text-align: center;
+}
+.textoSeparador h2{
+    font-family: 'Oswald', sans-serif;
+    font-size: 35px;
+    color: gray;
+    font-weight: 400;
+}
+.nombrePost{
+    font-family: 'Montserrat', sans-serif;
+}
+.underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #56baed;
+  content: "";
+  transition: width 0.2s;
+}
+
+.underlineHover:hover {
+  color: #0d0d0d;
+}
+
+.underlineHover:hover:after{
+  width: 100%;
 }
 .icoNoti{
     font-size: 15px;
@@ -121,6 +216,33 @@
     #msg{
         min-width: 200px;
         height: 50px;
+    }
+    .mover{
+        top: 350px;
+        width: 92%;
+    }
+    .fondo{
+        height: 150px;
+    }
+    #imgPerfil{
+        width: 130px;
+        height: 130px;
+    }
+    .caja{
+        width: 100%;
+        justify-content: center;
+        align-items:center;
+    }
+    #caso{
+        position : absolute;
+        text-align: center;
+        top : 120px;
+        left: 39%;
+        transform: translate(-39%);
+        color: black;
+    }
+    .infoPersonal{
+        margin-top:170px
     }
 }
 

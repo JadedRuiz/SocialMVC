@@ -10,7 +10,7 @@ namespace SocialMVC.Controllers
 {
     public class PostsController : Controller
     {
-        SocialServiceEntities3 db = new SocialServiceEntities3();
+        SocialServiceEntities5 db = new SocialServiceEntities5();
         // GET: Posts
             //Perfil usuario en sesion
         public ActionResult Perfil(int id_amigo = 0)
@@ -36,6 +36,7 @@ namespace SocialMVC.Controllers
                                       contraseña = u.contraseña,
                                       telefono = u.telefono,
                                       path_perfil = u.path_perfil,
+                                      path_fondo = u.path_fondo,
                                       descripcion = u.descripcion
                                   }).First();
                 var user = new User
@@ -49,6 +50,7 @@ namespace SocialMVC.Controllers
                     contraseña = infoPerfil.contraseña,
                     telefono = infoPerfil.telefono,
                     path_perfil = infoPerfil.path_perfil,
+                    path_fondo = infoPerfil.path_fondo,
                     descripcion = infoPerfil.descripcion
                 };
                 ViewBag.Perfil = user;
@@ -66,6 +68,7 @@ namespace SocialMVC.Controllers
                                          path_img = p.path_img,
                                          fecha = up.fecha_post
                                      }).ToList();
+                publicaciones = publicaciones.OrderBy(x => x.fecha).ToList();
                 foreach (var item in publicaciones)
                 {
                     int[] reacciones = new int[6];
@@ -119,7 +122,7 @@ namespace SocialMVC.Controllers
                                      join p in db.post on up.post_id equals p.id_post
                                      join ua in db.usuario_amigo on up.usuario_id equals ua.id_amigo
                                      join u in db.usuario on ua.id_amigo equals u.id_usuario
-                                     where ua.usuario_id == id && ua.tipo == 1
+                                     where ua.tipo == 1
                                      && up.fecha_post >= horaA
                                      select new
                                      {
@@ -129,6 +132,7 @@ namespace SocialMVC.Controllers
                                          path_img = p.path_img,
                                          fecha = up.fecha_post
                                      }).ToList();
+                publicaciones = publicaciones.OrderBy(s => s.fecha).ToList();
                 foreach (var item in publicaciones)
                 {
                     int[] reacciones = new int[6];
@@ -181,14 +185,14 @@ namespace SocialMVC.Controllers
                 pt.text_post = text_post;
                 if (file != null)
                 {
-                    var ruta = AppDomain.CurrentDomain.GetData("APPBASE").ToString() + "Content\\" + Session["nombre"] + "\\img_posts";
+                    var ruta = AppDomain.CurrentDomain.GetData("APPBASE").ToString() + "Content\\img_users\\" + Session["nombre"] + "\\img_posts";
                     if (!Directory.Exists(ruta))
                     {
                         Directory.CreateDirectory(ruta);
                     }
                     var name = DateTime.Now.ToString("yyyyMMddHHmmss") + "-" + file.FileName;
                     file.SaveAs((ruta + "\\" + name).ToLower());
-                    pt.path_img = "../Content/" + Session["nombre"] + "/img_posts/" + name;
+                    pt.path_img = "../Content/img_users/" + Session["nombre"] + "/img_posts/" + name;
                 }
                 else
                     pt.path_img = "";

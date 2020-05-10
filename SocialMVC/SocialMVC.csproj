@@ -165,40 +165,38 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BusquedaModel.cs" />
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PostsModel.cs" />
     <Compile Include="Models\reacciones_post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+    <Compile Include="Models\RespuestaModel.cs" />
+    <Compile Include="Models\SocialMVC.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialMVC.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SocialMVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SocialMVC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocialMVC.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\usuario.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuario_amigo.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuario_post.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SocialMVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValidarUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,33 +209,34 @@
     <Content Include="Content\img\fondo_redsociety.jfif" />
     <Content Include="Content\img_perfil\img_perfil1.jpg" />
     <Content Include="Content\js\index.js" />
+    <Content Include="Content\js\js-login.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\SocialMVC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>SocialMVC.edmx</DependentUpon>
+      <LastGenOutput>SocialMVC.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\SocialMVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>SocialMVC.edmx</DependentUpon>
+      <LastGenOutput>SocialMVC.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\ai.0.22.9-build00167.js" />
-    <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\ai.1.0.20-build00666.js" />
+    <Content Include="Scripts\ai.1.0.20-build00666.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\SocialMVC.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>SocialMVC.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\SocialMVC.edmx.diagram">
+      <DependentUpon>SocialMVC.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
